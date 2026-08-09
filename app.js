@@ -63,6 +63,70 @@ const SPECS={
 60:["copyright","保護される","ソースプログラム","保護されない","アイデア・通信規約・アルゴリズム","表現と発想を区別"]
 };
 
+// 科目A模試1専用の図解定義。問題ごとに計算・構成・比較・時系列を描き分ける。
+const MOCK_SPECS={
+1:["truth",["X","Y","X□Y"],["0 0 → 1","0 1 → 1","1 0 → 0","1 1 → 1"],"二つの式を同時に満たす列を作る"],
+2:["bayes","原因の事前確率","観測結果","原因の事後確率","P(原因|結果)","結果から原因へ逆算"],
+3:["compare","学習データ","正解率が非常に高い","テストデータ","正解率が大きく低下","差が大きい＝過学習"],
+4:["precision","大きい数へ指数をそろえる","小さい数の有効桁","7ビットより下位","切捨て","小さい値が消える＝情報落ち"],
+5:["tree","a",["b","c"],["d","e","f","g"],"左＜親＜右","d＜b＜e＜a＜f＜c＜g"],
+6:["stack",["PUSH A","PUSH B","PUSH C"],["C","B","A"],"最後に入れたものからPOP","Cの下のAを先に取り出せない"],
+7:["quadrants",["DOM：文書操作API","JSON：名前と値","SOAP：通信規約","XML：タグ記述"],"JSONを選ぶ","データ表現・API・通信規約を分ける"],
+8:["hub","GPU",["多数の演算器","同種計算","大量データ","並列実行"],"CPUは制御・入出力を担当"],
+9:["pipeline",["フェッチ","デコード","実行","メモリ","書込み"],"命令1",["命令2","命令3"],"段をずらして同時進行"],
+10:["equation","0.7＋(0.7x)/(20－x) ＞ 0.9",["x＞4.44","整数の最小値"],"x＝5台","停止負荷を稼働中の台数で分担"],
+11:["iac","構成コード","版管理・レビュー","自動構築","同じ環境を再現","手作業の差異を減らす"],
+12:["availability",["A：並列2台","B：直列＋並列","C：直列組を並列"],["0.9900","0.8910","0.9639"],"A ＞ C ＞ B","直列は積、並列は全停止を1から引く"],
+13:["ribbon","利用者入力","宿泊施設検索API","空室確認API","結果を一つに統合","入出力を連結するロジックマッシュアップ"],
+14:["compare","主記憶が不足","ページフォールト多発","主記憶を増設","ワーキングセット保持","CPU強化では解消しない"],
+15:["quadrants",["利用","改変","再配布","著作権表示・条件"],"OSSライセンス","無償＝無条件ではない"],
+16:["circuit",["A","B"],"A OR B","NOT","Y",["00→1","01→0","10→0","11→0"],"NANDを段階的に簡約するとNOR"],
+17:["compare","PC：複数列","同一HTML＋CSS","スマホ：1列","メディアクエリ","端末別HTMLを作らない"],
+18:["quadrants",["原子性：全部かゼロ","一貫性：制約維持","隔離性：相互影響なし","持続性：結果を保持"],"ACID","設問は原子性"],
+19:["ribbon","注文コード","顧客コード","顧客住所","X→Y→Z","非キー属性を介する推移的関数従属"],
+20:["compare","データウェアハウス","目的別に抽出・加工","データマート","部門・分析向けDB","生データ保存のレイクとは別"],
+21:["table",["更新前：A444","対象：2行","更新後：A777","A777が重複"],"PRIMARY KEY違反","更新後の一意性を確認"],
+22:["hub","NoSQL",["キー","バリュー","高速参照","柔軟な構造"],"RDBMS以外のDB群"],
+23:["ribbon","電波を確認","使用中なら待機","ランダム待機","送信","無線は衝突を検出せず事前回避"],
+24:["duplex","端末A","送信 →","← 送信","端末B","双方が同時に送受信"],
+25:["network",["送信端末","ルータ1","ルータ2","宛先端末"],"IP：端から端まで維持","MAC：リンクごとに更新","ルータは新しいフレームを作る"],
+26:["binary","172.30.123.45","255.255.252.0","AND","172.30.120.0","第3オクテットを2進数で計算"],
+27:["security","悪意あるWebサイト","閲覧だけで脆弱性を悪用","利用者端末","マルウェア自動感染","明示的な実行がなくても感染"],
+28:["ribbon","HTTPS通信","SSLアクセラレータで復号","WAFでHTTP検査","Webサーバ","暗号化中は内容を検査できない"],
+29:["risk",["端末","IP・場所","時刻","試行回数","行動"],"リスク評価","高リスク時だけ追加認証"],
+30:["ribbon","通常パターンを学習","外れた通信を検知","人が結果を確認","対応","未知攻撃を狙うが誤検知に注意"],
+31:["ribbon","SYN","ESTABLISHED","通信状態を記録","戻りパケット照合","セッション状態で通過・遮断"],
+32:["compare","オンライン複製","攻撃から書換え可能","WORMバックアップ","消去・変更不可","復旧用は攻撃経路から隔離"],
+33:["attack","少数のパスワード",["ID-001","ID-002","ID-003","多数のID"],"横断的な失敗監視","レート制限＋追加認証"],
+34:["hub","API連携",["注文サービス","在庫サービス","決済サービス","配送サービス"],"個別に変更・展開できる"],
+35:["compare","障害発生","サービス停止","予備系へ切替え","自動復旧","耐障害性・回復性を高める"],
+36:["classes",["18歳未満","18歳以上"],["代表値10歳","代表値25歳"],"同じ結果になる範囲ごとに1件","17・18・19は境界値分析"],
+37:["cycle",["計画","開発","レビュー","振返り"],"固定長スプリント","リリース判断可能なインクリメント"],
+38:["story","利用者として","目的のために","機能が欲しい","価値に焦点","誰が・何のために・何を"],
+39:["hub","旅行情報サービス",["地図API","天気API","経路検索API"],"既存機能を組み合わせ新サービスへ"],
+40:["ribbon","スプリントゴール","選択した項目","実現する作業計画","開発者が更新","固定計画ではない"],
+41:["critical","開始",["A 3日","E 5日"],"合流",["F 14日","H 15日","I 5日"],"終了 31日","合流点では到着時刻の最大値"],
+42:["decision","新規開発",["需要大 0.6 × 30億","需要小 0.4 × −10億"],"18−4","EMV＝14億円","金額×確率を全枝で合計"],
+43:["security","外部に接する扉","常時施錠なし","保護領域","未認可アクセスの危険","錠・警報・開閉制御が必要"],
+44:["percent",["移行前 98.00%","移行後 99.99%"],"99.99−98.00","1.99ポイント向上","割合差はパーセントポイント"],
+45:["ribbon","影響度を判定","報告・対応手順","障害内容を記録","原因究明・再発防止","全障害を同一手順にしない"],
+46:["ribbon","業務を可視化","非効率を見直す","定型処理を選ぶ","RPAで自動化","変更・例外が少ない業務から"],
+47:["hybridcloud","社内DB","機密データ保持","クラウド","変動負荷を伸縮","段階導入でTCO・SLA・安全性を確認"],
+48:["quadrants",["多様性を認知","能力を活用","機会を提供","競争力へつなげる"],"ダイバーシティ管理","違いを価値創造の源泉にする"],
+49:["hub","一貫した顧客体験",["実店舗","EC","コールセンタ","共通在庫・顧客情報"],"チャネル間を連携する"],
+50:["canvas",["顧客 CS","価値 VP","チャネル CH","関係 CR","収益 R$","資源 KR","活動 KA","協力 KP","コスト C$"],"価値提案 VP","顧客へ何を提供するか"],
+51:["equation","(当月末会員−新規会員) ÷ 前月末会員",["B：(800−200)÷1000","×100"],"60%で最大","新規会員を除いて継続者を数える"],
+52:["adoption",["イノベータ","アーリーアダプタ","キャズム","アーリーマジョリティ","レイト層"],"初期市場","主流市場","普及の大きな溝"],
+53:["hub","口座情報を一括表示",["銀行A","銀行B","証券口座","カード"],"FinTechのアカウントアグリゲーション"],
+54:["ribbon","収集","整備・クレンジング","分析・規則発見","戦略へ活用","機械学習・クラスタリングは分析工程"],
+55:["ribbon","カメラで撮影","端末近くでAI推論","即時に異常判定","排除装置へ通知","低遅延・外部送信なし"],
+56:["scatter","x増加","y減少","右下がり","相関係数＜0","負の相関。因果関係とは別"],
+57:["equation","(固定費＋目標利益) ÷ 限界利益率",["限界利益率＝1−変動費率","目標利益を分子へ加える"],"必要売上高","利益0なら損益分岐点"],
+58:["abc","A：累計70%まで","B：累計90%まで","C：残り","商品2・5がA","金額の降順で累計する"],
+59:["ribbon","専門家へ匿名調査","回答を集計","結果をフィードバック","再回答して収束","反復するため期間が長い"],
+60:["compare","著作権","譲渡できる財産権","著作者人格権","著作者専属・譲渡不可","氏名表示権は人格権"],
+};
+
 const MEMORY_LINES=[
 "中身f・桁ずらしe・ものさしr","2σなら外は約5%","経験で近道、最適保証なし","符号が変わる半分を残す","データ＋次の住所",
 "バブルは隣と交換","サーバでJava、返すのはHTML","認証は誰、認可は何をしてよい","スルーは主記憶まで通り抜ける","データ結合が最弱で理想",
@@ -83,21 +147,29 @@ const chain=(items)=>`<div class="pv-chain">${items.map((x,i)=>`${i?arrow():""}$
 const cards=(items)=>`<div class="pv-cards">${items.map((x,i)=>`<span class="${i===items.length-1?"accent":""}">${esc(x)}</span>`).join("")}</div>`;
 
 function renderSpec(q){
- const s=["stages",[...q.diagram.slice(0,3),`正解 ${q.answer}`],"","",q.caption];
+ const s=MOCK_SPECS[q.n]||["ribbon",q.title,...q.reasoning,q.caption];
  const t=s[0];
  if(t==="bell")return `<div class="pv-bell"><svg viewBox="0 0 360 170"><path d="M18 145 C90 145 92 20 180 20 S270 145 342 145"/><line x1="72" y1="145" x2="72" y2="76"/><line x1="288" y1="145" x2="288" y2="76"/></svg><b>${esc(s[4])}</b><span>${esc(s[2])}</span><span>${esc(s[3])}</span><em>${esc(s[5])}</em></div>`;
  if(t==="equation"||t==="formula"||t==="breakeven")return `<div class="pv-equation"><strong>${esc(s[1])}</strong>${Array.isArray(s[2])?cards(s[2]):""}<b>${esc(s[3]||"")}</b><p>${esc(s[4]||"")}</p></div>`;
  if(t==="sort")return `<div class="pv-sort"><div>${s[1].map(x=>node(x)).join("")}</div><i>↓ 交換</i><div>${s[2].map((x,i)=>node(x,i===1||i===2?"accent":"")).join("")}</div><p>${esc(s[3])}</p></div>`;
  if(t==="coupling"||t==="risk"||t==="layers"||t==="lifecycle")return `<div class="pv-ladder">${s[1].map((x,i)=>`<span style="--i:${i}" class="${i===s[1].length-1?"accent":""}">${esc(x)}</span>`).join("")}<b>${esc(s[2])}</b><p>${esc(s[3])}</p></div>`;
  if(t==="critical")return `<div class="pv-critical">${node(s[1])}<div>${s[2].map(x=>`<span>${esc(x)}</span>`).join("")}</div>${node(s[3])}<div>${s[4].map(x=>`<span>${esc(x)}</span>`).join("")}</div>${node(s[5],"accent")}<p>${esc(s[6])}</p></div>`;
- if(t==="pest"||t==="iprights"||t==="organization"||t==="account"||t==="uml")return `<div class="pv-quadrants">${s[1].map((x,i)=>`<span class="${i===q.answer.length?"accent":""}">${esc(x)}</span>`).join("")}<b>${esc(s[2])}</b><p>${esc(s[3]||"")}</p></div>`;
+ if(t==="pest"||t==="iprights"||t==="organization"||t==="account"||t==="uml"||t==="quadrants")return `<div class="pv-quadrants">${s[1].map((x,i)=>`<span class="${i===1?"accent":""}">${esc(x)}</span>`).join("")}<b>${esc(s[2])}</b><p>${esc(s[3]||"")}</p></div>`;
  if(t==="position")return `<div class="pv-position"><i class="x"></i><i class="y"></i><small>${esc(s[1])}</small><small>${esc(s[2])}</small>${node(s[3],"a")}${node(s[4],"b")}${node(s[5],"c")}<p>${esc(s[6])}</p></div>`;
  if(t==="begraph")return `<div class="pv-graph"><svg viewBox="0 0 360 190"><line x1="28" y1="165" x2="340" y2="165"/><line x1="28" y1="165" x2="28" y2="18"/><line class="sales" x1="28" y1="165" x2="320" y2="25"/><line class="cost-a" x1="28" y1="120" x2="320" y2="50"/><line class="cost-b" x1="28" y1="145" x2="320" y2="38"/><circle cx="185" cy="90" r="7"/></svg><b>${esc(s[4])}</b><p>${esc(s[5])}</p></div>`;
  if(t==="abc")return `<div class="pv-abc"><span class="a">${esc(s[1])}</span><span class="b">${esc(s[2])}</span><span class="c">${esc(s[3])}</span><b>${esc(s[4])}</b><p>${esc(s[5])}</p></div>`;
- if(t==="security"||t==="waf"||t==="signature"||t==="mail"||t==="copyright"||t==="reliability")return `<div class="pv-compare"><section><b>${esc(s[1])}</b><span>${esc(s[2])}</span></section><i>⇄</i><section class="accent"><b>${esc(s[3])}</b><span>${esc(s[4])}</span></section><p>${esc(s[5])}</p></div>`;
+ if(t==="security"||t==="waf"||t==="signature"||t==="mail"||t==="copyright"||t==="reliability"||t==="compare")return `<div class="pv-compare"><section><b>${esc(s[1])}</b><span>${esc(s[2])}</span></section><i>⇄</i><section class="accent"><b>${esc(s[3])}</b><span>${esc(s[4])}</span></section><p>${esc(s[5])}</p></div>`;
  if(t==="interval")return `<div class="pv-interval"><div><b>${esc(s[1])}</b><i></i><b>${esc(s[3])}</b><i class="active"></i><b>${esc(s[4])}</b><i class="active"></i><b>${esc(s[2])}</b></div><p>${esc(s[5])}</p></div>`;
- if(["web","architecture","kernel","sdn","loadbalance","mail"].includes(t)){const v=s.slice(1,-1).flat().filter(x=>typeof x==="string");return `<div class="pv-hub"><strong>${esc(v.shift())}</strong><div>${v.map((x,i)=>`<span class="${i===v.length-1?"accent":""}">${esc(x)}</span>`).join("")}</div><p>${esc(s[s.length-1])}</p></div>`}
- if(["locks","state","iac","backlog","kpi","baseline","bpr","disruption","lidar","maas"].includes(t)){const v=s.slice(1,-1).flat().filter(x=>typeof x==="string");return `<div class="pv-ribbon">${v.map((x,i)=>`<section><i>${i+1}</i><b>${esc(x)}</b></section>`).join("")}<p>${esc(s[s.length-1])}</p></div>`}
+ if(["truth","table","classes","canvas"].includes(t)){const cells=s.slice(1,-2).flat();return `<div class="pv-matrix pv-${t}">${cells.map((x,i)=>`<span class="${i===cells.length-1?"accent":""}">${esc(x)}</span>`).join("")}<b>${esc(s[s.length-2])}</b><p>${esc(s[s.length-1])}</p></div>`}
+ if(["tree","network","decision","attack"].includes(t)){const values=s.slice(1,-2).flat();return `<div class="pv-branch pv-${t}"><strong>${esc(values.shift())}</strong><div>${values.map((x,i)=>`<span class="${i===values.length-1?"accent":""}">${esc(x)}</span>`).join("")}</div><b>${esc(s[s.length-2])}</b><p>${esc(s[s.length-1])}</p></div>`}
+ if(["pipeline","precision","circuit","binary","duplex","story","adoption","hybridcloud","bayes"].includes(t)){const values=s.slice(1,-2).flat();return `<div class="pv-process pv-${t}">${values.map((x,i)=>`<section class="${i===values.length-1?"accent":""}"><i>${i+1}</i><b>${esc(x)}</b></section>`).join("")}<strong>${esc(s[s.length-2])}</strong><p>${esc(s[s.length-1])}</p></div>`}
+ if(t==="stack")return `<div class="pv-stack"><div class="push">${s[1].map(x=>`<span>${esc(x)}</span>`).join("")}</div><i>⇣ PUSH / POP ⇡</i><div class="pile">${s[2].map((x,i)=>`<span class="${i===0?"accent":""}">${esc(x)}</span>`).join("")}</div><b>${esc(s[3])}</b><p>${esc(s[4])}</p></div>`;
+ if(t==="availability")return `<div class="pv-meters">${s[1].map((x,i)=>`<section><b>${esc(x)}</b><i><em style="width:${Number(s[2][i])*100}%"></em></i><strong>${esc(s[2][i])}</strong></section>`).join("")}<h4>${esc(s[3])}</h4><p>${esc(s[4])}</p></div>`;
+ if(t==="percent")return `<div class="pv-percent">${s[1].map((x,i)=>`<section><b>${esc(x)}</b><i><em style="width:${i?99.99:98}%"></em></i></section>`).join("")}<strong>${esc(s[2])} ＝ ${esc(s[3])}</strong><p>${esc(s[4])}</p></div>`;
+ if(t==="scatter")return `<div class="pv-scatter"><svg viewBox="0 0 360 210"><line x1="35" y1="180" x2="335" y2="180"/><line x1="35" y1="180" x2="35" y2="20"/><line class="trend" x1="55" y1="45" x2="315" y2="160"/>${[[70,48],[95,72],[125,69],[150,96],[178,104],[205,126],[235,120],[260,145],[295,151]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="6"/>`).join("")}</svg><strong>${esc(s[3])} → ${esc(s[4])}</strong><p>${esc(s[5])}</p></div>`;
+ if(t==="cycle")return `<div class="pv-cycle">${s[1].map((x,i)=>`<span style="--r:${i*90}deg">${esc(x)}</span>`).join("")}<b>${esc(s[2])}</b><strong>${esc(s[3])}</strong></div>`;
+ if(["web","architecture","kernel","sdn","loadbalance","mail","hub"].includes(t)){const v=s.slice(1,-1).flat().filter(x=>typeof x==="string");return `<div class="pv-hub"><strong>${esc(v.shift())}</strong><div>${v.map((x,i)=>`<span class="${i===v.length-1?"accent":""}">${esc(x)}</span>`).join("")}</div><p>${esc(s[s.length-1])}</p></div>`}
+ if(["locks","state","iac","backlog","kpi","baseline","bpr","disruption","lidar","maas","ribbon"].includes(t)){const v=s.slice(1,-1).flat().filter(x=>typeof x==="string");return `<div class="pv-ribbon">${v.map((x,i)=>`<section><i>${i+1}</i><b>${esc(x)}</b></section>`).join("")}<p>${esc(s[s.length-1])}</p></div>`}
  const values=s.slice(1,-1).flat().filter(x=>typeof x==="string");
  return `<div class="pv-topic pv-${esc(t)}">${chain(values)}<p>${esc(s[s.length-1])}</p></div>`;
 }
