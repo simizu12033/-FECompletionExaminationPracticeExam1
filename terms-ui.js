@@ -40,9 +40,9 @@ const TERM_CLUES=[
 "事業単位へ大きな権限と責任を与えるならカンパニー制。","損益分岐点売上高=固定費÷限界利益率。","累積金額比率が高い少数項目をAとして重点管理。","売上線と費用線の交点が損益分岐点。","保護対象は具体的な表現。アイデアやアルゴリズム自体は対象外。"
 ];
 const termGuide=term=>({
-  cue:typeof MEMORY_LINES!=="undefined"&&MEMORY_LINES[term.q-1]?MEMORY_LINES[term.q-1]:term.cue,
-  definition:TERM_DEFINITIONS[term.q-1]||term.meaning,
-  clue:TERM_CLUES[term.q-1]||term.trap
+  cue:term.cue,
+  definition:term.meaning,
+  clue:term.clue||term.cue
 });
 
 function saveTermProgress(){
