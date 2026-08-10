@@ -1,4 +1,4 @@
-const TERM_STORAGE_KEY="tokurei-fe-20240609-term-progress";
+const TERM_STORAGE_KEY="fe-kamoku-a-moshi-1-term-progress";
 const termState={
   filter:"すべて",
   query:"",
@@ -62,7 +62,7 @@ function filteredTerms(){
   });
 }
 function weakTermsFromAnswers(){
-  const answers=JSON.parse(localStorage.getItem("tokurei-fe-20240609-answers")||"{}");
+  const answers=JSON.parse(localStorage.getItem("fe-kamoku-a-moshi-1-answers")||"{}");
   if(typeof QUESTIONS==="undefined")return [];
   return TERMS.filter(t=>{
     const q=QUESTIONS.find(x=>x.n===t.q);

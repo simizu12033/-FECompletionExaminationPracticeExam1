@@ -1,5 +1,5 @@
 const qs=s=>document.querySelector(s);
-const STORAGE_PREFIX="tokurei-fe-20240609";
+const STORAGE_PREFIX="fe-kamoku-a-moshi-1";
 const STORAGE={
   phase:`${STORAGE_PREFIX}-phase`,
   answers:`${STORAGE_PREFIX}-answers`,
@@ -151,6 +151,7 @@ function renderLearning(){
     node.querySelector(".answer-strip").hidden=!isReview();
     node.querySelector(".summary").textContent=q.summary;
     node.querySelector(".reasoning").innerHTML=q.reasoning.map(x=>`<li>${x}</li>`).join("");
+    node.querySelector(".pdf-detail div").textContent=q.pdfDetail||"";
     node.querySelector(".trap p").textContent=q.trap;
     node.querySelector(".diagram").innerHTML=window.renderRichVisual(q);
     node.querySelector("figcaption").textContent=q.caption;
